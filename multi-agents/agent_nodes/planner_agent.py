@@ -147,7 +147,8 @@ async def planner_agent_node(state: GlobalState) -> Dict[str, Any]:
         model=CHAT_MODEL,
         base_url=LLM_BASE_URL,
         api_key=LLM_API_KEY,
-        temperature=CHAT_TEMPERATURE
+        temperature=CHAT_TEMPERATURE,
+        extra_body={"enable_thinking": False}
     )
     
     chat_llm = reasoning_llm  # 使用同一个 LLM

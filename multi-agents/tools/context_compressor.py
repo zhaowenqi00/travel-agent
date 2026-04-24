@@ -19,6 +19,7 @@ def _get_llm():
             api_key=LLM_API_KEY,
             base_url=LLM_BASE_URL,
             temperature=CHAT_TEMPERATURE,
+            extra_body={"enable_thinking": False},
         )
     return llm
 

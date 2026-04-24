@@ -134,14 +134,16 @@ async def main_agent_node(state: GlobalState) -> Dict[str, Any]:
                 model=CHAT_MODEL,
                 base_url=LLM_BASE_URL,
                 api_key=LLM_API_KEY,
-                temperature=CHAT_TEMPERATURE
+                temperature=CHAT_TEMPERATURE,
+                extra_body={"enable_thinking": False}
             )
             
             conversation_llm = ChatOpenAI(
                 model=CHAT_MODEL,
                 base_url=LLM_BASE_URL,
                 api_key=LLM_API_KEY,
-                temperature=CHAT_TEMPERATURE
+                temperature=CHAT_TEMPERATURE,
+                extra_body={"enable_thinking": False}
             )
             
             friendly_prompt = ChatPromptTemplate.from_messages([
@@ -182,7 +184,8 @@ async def main_agent_node(state: GlobalState) -> Dict[str, Any]:
         model=CHAT_MODEL,
         base_url=LLM_BASE_URL,
         api_key=LLM_API_KEY,
-        temperature=0.3
+        temperature=0.3,
+        extra_body={"enable_thinking": False}
     )
     
     prompt = ChatPromptTemplate.from_messages([
@@ -218,7 +221,8 @@ async def main_agent_node(state: GlobalState) -> Dict[str, Any]:
             model=CHAT_MODEL,
             base_url=LLM_BASE_URL,
             api_key=LLM_API_KEY,
-            temperature=CHAT_TEMPERATURE
+            temperature=CHAT_TEMPERATURE,
+            extra_body={"enable_thinking": False}
         )
         
         conversation_prompt = ChatPromptTemplate.from_messages([

@@ -61,7 +61,8 @@ async def summarizer_agent_node(state: GlobalState) -> Dict[str, Any]:
         model=CHAT_MODEL,
         base_url=LLM_BASE_URL,
         api_key=LLM_API_KEY,
-        temperature=CHAT_TEMPERATURE
+        temperature=CHAT_TEMPERATURE,
+        extra_body={"enable_thinking": False}
     )
     
     # 简单查询模式的提示词 - 更简洁，专注于用户的具体问题

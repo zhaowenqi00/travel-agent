@@ -117,12 +117,13 @@ async def react_loop(state: GlobalState, planner_context: Dict, executor_context
         model=CHAT_MODEL,
         base_url=LLM_BASE_URL,
         api_key=LLM_API_KEY,
-        temperature=CHAT_TEMPERATURE
+        temperature=CHAT_TEMPERATURE,
+        extra_body={"enable_thinking": False}
     )
     
     # 最大迭代次数仅作为安全限制，防止死循环
     # LLM可以在任何时候决定提前结束
-    max_iterations = 8
+    max_iterations = 5
     iteration_count = 0
     
     print(f"\n📋 配置信息:")

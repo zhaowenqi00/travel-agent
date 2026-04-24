@@ -30,7 +30,8 @@ async def analyze_feedback_with_llm(user_feedback: str, current_profile: Dict[st
         model=CHAT_MODEL,
         base_url=LLM_BASE_URL,
         api_key=LLM_API_KEY,
-        temperature=0.3
+        temperature=0.3,
+        extra_body={"enable_thinking": False}
     )
     
     prompt = ChatPromptTemplate.from_messages([
