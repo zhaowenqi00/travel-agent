@@ -19,7 +19,7 @@
 - LangChain Agent 框架
 - FastAPI REST API
 - ChromaDB 向量数据库
-- DeepSeek R1 + Qwen3 双模型协作
+- 深度推理模型 + 普通对话模型 双模型协作
 - MCP (Model Context Protocol) 外部工具集成
 
 **前端**
@@ -84,9 +84,11 @@ LLM_PROVIDER=dashscope
 # ============================================================
 # 模型配置
 # ============================================================
+深度推理模型（负责规划分析）
 REASONING_MODEL=qwen-max
 REASONING_TEMPERATURE=0.1
 
+普通模型（负责对话输出）
 CHAT_MODEL=qwen-plus
 CHAT_TEMPERATURE=0.7
 
@@ -156,12 +158,6 @@ npm run dev
 ## 原项目致谢
 
 本项目基于 [xiaoya5691/travel-agent](https://github.com/xiaoya5691) 开发。
-
-原项目核心功能：
-- LangGraph Multi-Agents 架构
-- DeepSeek R1 + Qwen3 双模型协作
-- MCP 外部工具集成 (12306/高德地图/黄历)
-- RAG 向量检索
 
 ## 许可证
 
