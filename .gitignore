@@ -6,8 +6,9 @@ __pycache__/
 .Python
 venv/
 env/
-.env
 .venv
+
+docs/
 
 # Node
 node_modules/
