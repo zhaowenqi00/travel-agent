@@ -27,11 +27,24 @@ class ChatResponse(BaseModel):
     current_agent: Optional[str] = None
 
 
-def initialize_state(user_query: str) -> GlobalState:
-    """初始化 Multi-Agents 全局状态"""
+def initialize_state(user_query: str, session_id: str, user_id: str = "default_user") -> GlobalState:
+    """初始化 Multi-Agents 全局状态，从会话历史加载上下文"""
+    chat_manager = get_chat_history_manager()
+    
+    # 加载历史消息
+    history_messages = chat_manager.get_session_messages(session_id)
+    
+    # 转换为 LangChain 消息格式
+    messages = []
+    for msg in history_messages:
+        if msg.message_type == "user":
+            messages.append(HumanMessage(content=msg.content))
+        else:  # ai message
+            messages.append(AIMessage(content=msg.content))
+    
     return {
         "user_query": None,
-        "messages": [],
+        "messages": messages,  # 包含历史消息
         "planner_context": None,
         "executor_context": None,
         "summarizer_context": None,
@@ -110,7 +123,7 @@ async def send_message(request: ChatRequest):
                 user_id=request.user_id,
             )
 
-            state = initialize_state(user_query)
+            state = initialize_state(user_query, session_id, request.user_id)
 
             final_result = None
             agent_name = None
@@ -185,7 +198,7 @@ async def send_message_sync(request: ChatRequest):
             user_id=request.user_id,
         )
 
-        state = initialize_state(user_query)
+        state = initialize_state(user_query, session_id, request.user_id)
         result = await travel_graph.ainvoke(state)
 
         answer, current_agent = extract_answer(result)
